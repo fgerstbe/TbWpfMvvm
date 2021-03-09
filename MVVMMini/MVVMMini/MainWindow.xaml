@@ -1,0 +1,39 @@
+﻿<Window x:Class="MVVMMini.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MVVMMini"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" FontSize="20">
+  <Window.Resources>
+    <DataTemplate x:Key="DataTemplate1">
+      <Button Content="{Binding DisplayText}" Width="50" Height="50" Margin="4" Command="{Binding }" ToolTip="{Binding ToolTipText}"/>
+    </DataTemplate>
+  </Window.Resources>
+  <Window.DataContext>
+    <local:ViewModel/>
+  </Window.DataContext>
+  <Window.InputBindings>
+    <KeyBinding Key="Add"  Modifiers="Ctrl" Command="{Binding PlusCommand}"/>
+  </Window.InputBindings>
+  <Grid>
+    <TextBox HorizontalAlignment="Left" Height="37" Margin="91,98,0,0" TextWrapping="Wrap" Text="{Binding Zahl1, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="133"/>
+    <TextBox HorizontalAlignment="Left" Height="37" Margin="358,98,0,0" TextWrapping="Wrap" Text="{Binding Zahl2, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="133"/>
+    <TextBlock HorizontalAlignment="Left" Margin="248,203,0,0" TextWrapping="Wrap" Text="{Binding Ergebnis}" VerticalAlignment="Top"/>
+    <Button ToolTip="Addition" Content="+" HorizontalAlignment="Left" Margin="113,270,0,0" VerticalAlignment="Top" Width="75" Command="{Binding PlusCommand}"/>
+    <Button ToolTip="Subtraktion" Content="-" HorizontalAlignment="Left" Margin="389,270,0,0" VerticalAlignment="Top" Width="75" Command="{Binding MinusCommand}"/>
+    <Slider HorizontalAlignment="Left" Margin="91,58,0,0" VerticalAlignment="Top" Height="30" Width="133" Maximum="10000" Value="{Binding Zahl1}"/>
+    <Slider HorizontalAlignment="Left" Margin="358,58,0,0" VerticalAlignment="Top" Height="30" Width="133" Maximum="10000" Value="{Binding Zahl2}"/>
+    <Menu  VerticalAlignment="Top">
+      <MenuItem Header="Rechnen">
+        <MenuItem Command="{Binding PlusCommand}" Header="+" ToolTip="Addition"/>
+        <MenuItem Command="{Binding MinusCommand}" Header="-" ToolTip="Subtraktion"/>
+      </MenuItem>
+    </Menu>
+    <ItemsControl HorizontalAlignment="Left" Height="183" Margin="535,203,0,0" VerticalAlignment="Top" Width="185" 
+             ItemsSource="{Binding Commands}" 
+             ItemTemplate="{DynamicResource DataTemplate1}"/>
+
+  </Grid>
+</Window>
