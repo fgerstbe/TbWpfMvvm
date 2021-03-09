@@ -1,15 +1,19 @@
-﻿<Window x:Class="MVVMMini.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MVVMMini"
+        xmlns:b="http://schemas.microsoft.com/xaml/behaviors" x:Class="MVVMMini.MainWindow"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" FontSize="20">
   <Window.Resources>
     <DataTemplate x:Key="DataTemplate1">
-      <Button Content="{Binding DisplayText}" Width="50" Height="50" Margin="4" Command="{Binding }" ToolTip="{Binding ToolTipText}"/>
+      <Button Content="{Binding DisplayText}"  Margin="4" Command="{Binding ''}" ToolTip="{Binding ToolTipText}"/>
     </DataTemplate>
+    <ItemsPanelTemplate x:Key="ItemsPanelTemplate1">
+      <UniformGrid/>
+    </ItemsPanelTemplate>
   </Window.Resources>
   <Window.DataContext>
     <local:ViewModel/>
@@ -17,23 +21,65 @@
   <Window.InputBindings>
     <KeyBinding Key="Add"  Modifiers="Ctrl" Command="{Binding PlusCommand}"/>
   </Window.InputBindings>
-  <Grid>
+  <Grid Name="G">
     <TextBox HorizontalAlignment="Left" Height="37" Margin="91,98,0,0" TextWrapping="Wrap" Text="{Binding Zahl1, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="133"/>
     <TextBox HorizontalAlignment="Left" Height="37" Margin="358,98,0,0" TextWrapping="Wrap" Text="{Binding Zahl2, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="133"/>
     <TextBlock HorizontalAlignment="Left" Margin="248,203,0,0" TextWrapping="Wrap" Text="{Binding Ergebnis}" VerticalAlignment="Top"/>
     <Button ToolTip="Addition" Content="+" HorizontalAlignment="Left" Margin="113,270,0,0" VerticalAlignment="Top" Width="75" Command="{Binding PlusCommand}"/>
     <Button ToolTip="Subtraktion" Content="-" HorizontalAlignment="Left" Margin="389,270,0,0" VerticalAlignment="Top" Width="75" Command="{Binding MinusCommand}"/>
-    <Slider HorizontalAlignment="Left" Margin="91,58,0,0" VerticalAlignment="Top" Height="30" Width="133" Maximum="10000" Value="{Binding Zahl1}"/>
-    <Slider HorizontalAlignment="Left" Margin="358,58,0,0" VerticalAlignment="Top" Height="30" Width="133" Maximum="10000" Value="{Binding Zahl2}"/>
+    <Slider HorizontalAlignment="Left" Margin="91,58,0,0" VerticalAlignment="Top" Height="30" Width="133" Maximum="10000" Value="{Binding Zahl1}">
+      <b:Interaction.Behaviors>
+        <local:SliderMouseWheelBehavior/>
+      </b:Interaction.Behaviors>
+    </Slider>
+    <Slider HorizontalAlignment="Left" Margin="358,58,0,0" VerticalAlignment="Top" Height="30" Width="133" Maximum="10000" Value="{Binding Zahl2}">
+      <b:Interaction.Behaviors>
+        <local:SliderMouseWheelBehavior/>
+      </b:Interaction.Behaviors>
+    </Slider>
     <Menu  VerticalAlignment="Top">
       <MenuItem Header="Rechnen">
         <MenuItem Command="{Binding PlusCommand}" Header="+" ToolTip="Addition"/>
         <MenuItem Command="{Binding MinusCommand}" Header="-" ToolTip="Subtraktion"/>
       </MenuItem>
+      <MenuItem ItemsSource="{Binding Commands}" Header="Rechnen 2">
+        <MenuItem.ItemContainerStyle>
+          <Style TargetType="{x:Type MenuItem}">
+            <Setter Property="Header" Value="{Binding DisplayText}" />
+            <Setter Property="ToolTip" Value="{Binding ToolTipText}" />
+          </Style>
+        </MenuItem.ItemContainerStyle>
+      </MenuItem>
     </Menu>
     <ItemsControl HorizontalAlignment="Left" Height="183" Margin="535,203,0,0" VerticalAlignment="Top" Width="185" 
              ItemsSource="{Binding Commands}" 
-             ItemTemplate="{DynamicResource DataTemplate1}"/>
+             ItemTemplate="{DynamicResource DataTemplate1}" ItemsPanel="{DynamicResource ItemsPanelTemplate1}"/>
+    <Ellipse HorizontalAlignment="Left" Height="65" Margin="91,321,0,0" Stroke="Black" VerticalAlignment="Top" Width="199">
+      <b:Interaction.Triggers>
+        <b:EventTrigger EventName="MouseEnter">
+          <b:InvokeCommandAction Command="{Binding PlusCommand}"/>
+        </b:EventTrigger>
+        <b:EventTrigger EventName="MouseLeave">
+          <b:InvokeCommandAction Command="{Binding MinusCommand}"/>
+        </b:EventTrigger>
+      </b:Interaction.Triggers>
+      <Ellipse.Fill>
+        <LinearGradientBrush EndPoint="0.688,0.421" StartPoint="0.272,0.682">
+          <GradientStop Color="#FF08C7FF" Offset="0"/>
+          <GradientStop Color="#FFE82B2B" Offset="1"/>
+        </LinearGradientBrush>
+      </Ellipse.Fill>
+      <b:Interaction.Behaviors>
+        <b:MouseDragElementBehavior/>
+      </b:Interaction.Behaviors>
+    </Ellipse>
+    <Button Content="Button" HorizontalAlignment="Left" Margin="32,178.5,0,189.4" Width="87">
+      <b:Interaction.Triggers>
+        <b:EventTrigger EventName="Click">
+          <b:ChangePropertyAction TargetName="G" PropertyName="Background" Value="Red"/>
+        </b:EventTrigger>
+      </b:Interaction.Triggers>
+    </Button>
 
   </Grid>
 </Window>
