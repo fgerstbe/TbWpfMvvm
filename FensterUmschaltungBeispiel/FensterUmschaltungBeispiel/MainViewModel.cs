@@ -42,7 +42,8 @@ namespace FensterUmschaltungBeispiel
       NavigationCommands = new List<ActionCommand>
       {
         new ActionCommand(()=>ShowViewModel(typeof(OrteViewModel))){DisplayText="Orte"},
-        new ActionCommand(()=>ShowViewModel(typeof(MitarbeiterViewModel))){DisplayText="Mitarbeiter"}
+        new ActionCommand(()=>ShowViewModel(typeof(MitarbeiterViewModel))){DisplayText="Mitarbeiter"},
+        new ActionCommand(()=>ShowViewModel(typeof(BrowserViewModel))){DisplayText="Browser"}
       };
 
       //model = new Model();

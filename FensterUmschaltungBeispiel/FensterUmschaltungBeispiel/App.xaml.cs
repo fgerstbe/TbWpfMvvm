@@ -33,6 +33,7 @@ namespace FensterUmschaltungBeispiel
       builder.RegisterType<MainViewModel>().SingleInstance();
       builder.RegisterType<OrteViewModel>().SingleInstance();
       builder.RegisterType<MitarbeiterViewModel>().SingleInstance();
+      builder.RegisterType<BrowserViewModel>().SingleInstance();
 
       return builder.Build();
     }

@@ -15,9 +15,13 @@ namespace FensterUmschaltungBeispiel.ViewModels
     {
       this.Model = model;
       this.dataService = dataService;
+      Liste = model.Orte.Select(ort => new ListItem { Data = ort }).ToList();
     }
 
-    public IEnumerable<string> Orte { get => Model.Orte; }
+    //public IEnumerable<string> Orte { get => Model.Orte; }
+
+    public List<ListItem> Liste { get; set; }
+
 
     private string selection;
     private readonly DataService dataService;
