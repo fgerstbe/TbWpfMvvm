@@ -25,7 +25,8 @@
     <TextBox HorizontalAlignment="Left" Height="37" Margin="91,98,0,0" TextWrapping="Wrap" Text="{Binding Zahl1, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="133"/>
     <TextBox HorizontalAlignment="Left" Height="37" Margin="358,98,0,0" TextWrapping="Wrap" Text="{Binding Zahl2, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="133"/>
     <TextBlock HorizontalAlignment="Left" Margin="248,203,0,0" TextWrapping="Wrap" Text="{Binding Ergebnis}" VerticalAlignment="Top"/>
-    <Button ToolTip="Addition" Content="+" HorizontalAlignment="Left" Margin="113,270,0,0" VerticalAlignment="Top" Width="75" Command="{Binding PlusCommand}"/>
+    <Button ToolTip="Addition" Content="+" HorizontalAlignment="Left" Margin="113,270,0,0" VerticalAlignment="Top" Width="75"
+            Command="{Binding PlusCommand}"/>
     <Button ToolTip="Subtraktion" Content="-" HorizontalAlignment="Left" Margin="389,270,0,0" VerticalAlignment="Top" Width="75" Command="{Binding MinusCommand}"/>
     <Slider HorizontalAlignment="Left" Margin="91,58,0,0" VerticalAlignment="Top" Height="30" Width="133" Maximum="10000" Value="{Binding Zahl1}">
       <b:Interaction.Behaviors>

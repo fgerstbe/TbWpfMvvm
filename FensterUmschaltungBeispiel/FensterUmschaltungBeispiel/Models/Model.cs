@@ -9,7 +9,7 @@ namespace FensterUmschaltungBeispiel.Models
   public class Model
   {
     public List<Person> Mitarbeiter { get; set; }
-    public List<string> Orte { get; set; } = new List<string> { "Wien", "Berlin", "Oslo" };
+    public List<string> Orte { get; set; } = new List<string> { "Wien", "Berlin", "Oslo", "Köln", "Hamburg" };
 
     public Model()
     {

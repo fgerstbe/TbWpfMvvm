@@ -6,5 +6,8 @@
   <DataTemplate DataType="{x:Type vm:OrteViewModel}">
     <view:OrteView/>
   </DataTemplate>
-  
+
+  <DataTemplate DataType="{x:Type vm:MitarbeiterViewModel}">
+    <view:MitarbeiterView/>
+  </DataTemplate>
 </ResourceDictionary>

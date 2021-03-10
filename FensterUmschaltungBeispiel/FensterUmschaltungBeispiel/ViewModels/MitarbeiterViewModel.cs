@@ -9,31 +9,27 @@ using System.Threading.Tasks;
 
 namespace FensterUmschaltungBeispiel.ViewModels
 {
-  public class OrteViewModel : ViewModelBase
+  public class MitarbeiterViewModel : ViewModelBase
   {
-    public OrteViewModel(Model model, DataService dataService)
+    public MitarbeiterViewModel(Model model, DataService dataService)
     {
       this.Model = model;
       this.dataService = dataService;
     }
 
-    public IEnumerable<string> Orte { get => Model.Orte; }
-
-    private string selection;
+    private Person selectedMitarbeiter;
     private readonly DataService dataService;
 
-    public string Selection
+    public Person SelectedMitarbeiter
     {
-      get { return selection; }
+      get { return selectedMitarbeiter; }
       set
       {
-        selection = value;
-        //DataService.DieInstanz.SelectedOrt = value;
-        //DataService.DieInstanz.SelectedOrtSubject.OnNext(value);
-        dataService.SelectedOrtSubject.OnNext(value);
+        selectedMitarbeiter = value;
+        //DataService.DieInstanz.SelectedOrtSubject.OnNext(value.Wohnort);
+        dataService.SelectedOrtSubject.OnNext(value.Wohnort);
       }
     }
-
 
   }
 }

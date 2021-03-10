@@ -26,6 +26,14 @@
       <RowDefinition Height="47*"/>
     </Grid.RowDefinitions>
     <ContentControl Content="{Binding SelectedViewModel}" Grid.Column="1" Grid.Row="1"/>
+    <ItemsControl Grid.Row="1" Margin="3" ItemsSource="{Binding NavigationCommands}">
+      <ItemsControl.ItemTemplate>
+        <DataTemplate>
+          <Button Content="{Binding Path=DisplayText}" Command="{Binding}" Margin="3"/>
+        </DataTemplate>
+      </ItemsControl.ItemTemplate>
+    </ItemsControl>
 
+    <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding AusgewählterOrt}" Margin="3"/>
   </Grid>
 </Window>

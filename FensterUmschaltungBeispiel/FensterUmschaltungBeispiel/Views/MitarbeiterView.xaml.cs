@@ -1,5 +1,4 @@
-﻿using Autofac;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,18 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace FensterUmschaltungBeispiel
+namespace FensterUmschaltungBeispiel.Views
 {
   /// <summary>
-  /// Interaction logic for MainWindow.xaml
+  /// Interaction logic for MitarbeiterView.xaml
   /// </summary>
-  public partial class MainWindow : Window
+  public partial class MitarbeiterView : UserControl
   {
-    public MainWindow()
+    public MitarbeiterView()
     {
       InitializeComponent();
-      //this.DataContext = new MainViewModel();
-      this.DataContext = App.Container.Resolve<MainViewModel>();
     }
   }
 }
